@@ -1,0 +1,23 @@
+name: Starbound
+version: '1.0'
+author: "Atticus Zambrana"
+main: family.zambrana.starbound.Starter
+api-version: '1.21'
+commands:
+  fly:
+    permission: starbound.command.fly
+    description: "Fly into the sky"
+  rank:
+    description: Update a players rank on the server
+    permission: starbound.command.rank
+  sethome:
+    description: Allows you to set a home
+  home:
+    description: Teleport to your home
+
+
+permissions:
+  starbound.command.fly:
+    default: op
+  starbound.command.rank:
+    default: op
