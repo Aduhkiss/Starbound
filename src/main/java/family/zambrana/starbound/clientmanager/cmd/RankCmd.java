@@ -26,6 +26,14 @@ public class RankCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(sender instanceof Player) {
+            Player caller = (Player) sender;
+            if(!clientManager.getClient(caller).has(Rank.ADMIN)) {
+                caller.sendMessage("§cYou are not allowed to use this.");
+                return false;
+            }
+        }
+
 
         if (args.length != 2) {
             sender.sendMessage("§cUsage: /rank <player> <rank>");

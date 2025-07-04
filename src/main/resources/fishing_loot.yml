@@ -1,0 +1,181 @@
+custom_loot:
+
+  pearl_of_light:
+    material: ENDER_PEARL
+    name: "&bPearl of Light"
+    lore:
+      - "&7A radiant pearl infused with sea magic."
+      - "&fPerhaps it holds secrets of Atlantis..."
+    chance: 0.04
+
+  soggy_boot:
+    material: LEATHER_BOOTS
+    name: "&7Soggy Old Boot"
+    lore:
+      - "&8It smells like regret and dead fish."
+    chance: 0.15
+    enchantments:
+      BINDING_CURSE: 1
+
+  goldfish_scale:
+    material: GOLD_NUGGET
+    name: "&6Golden Fish Scale"
+    lore:
+      - "&7From a fish worth its weight in gold."
+    chance: 0.06
+
+  ancient_coin:
+    material: GOLD_INGOT
+    name: "&eAncient Pirate Coin"
+    lore:
+      - "&7Tarnished by time, valued by treasure hunters."
+    chance: 0.03
+
+  drowned_treasure_map:
+    material: PAPER
+    name: "&dCrumpled Treasure Map"
+    lore:
+      - "&7Half-soaked, half-legible."
+      - "&fMarked with an 'X'. Must be important..."
+    chance: 0.025
+
+  cursed_skull:
+    material: SKELETON_SKULL
+    name: "&cCursed Sailor's Skull"
+    lore:
+      - "&8You can hear faint whispers when holding it."
+    chance: 0.01
+
+  broken_fishing_rod:
+    material: FISHING_ROD
+    name: "&7Broken Fishing Rod"
+    lore:
+      - "&8Still smells like salmon."
+    chance: 0.1
+    enchantments:
+      VANISHING_CURSE: 1
+
+  sea_pickle_jar:
+    material: SEA_PICKLE
+    name: "&aJar of Pickled Sea Cucumbers"
+    lore:
+      - "&7Crunchy, salty, slightly cursed."
+    chance: 0.05
+
+  soggy_tome:
+    material: BOOK
+    name: "&9Waterlogged Wizard's Journal"
+    lore:
+      - "&7The ink is smeared, but power lingers."
+    chance: 0.02
+    enchantments:
+      PROTECTION_ENVIRONMENTAL: 2
+      CHANNELING: 1
+
+  trophy_fish:
+    material: COD
+    name: "&3Trophy-Sized Cod"
+    lore:
+      - "&7The one that didn’t get away."
+      - "&fMountable. Brag-worthy."
+    chance: 0.04
+
+  message_in_a_bottle:
+    material: GLASS_BOTTLE
+    name: "&eMessage in a Bottle"
+    lore:
+      - "&7The bottle is sealed tight..."
+      - "&fBut there's something inside."
+    chance: 0.03
+
+  enchanted_fishhook:
+    material: TRIPWIRE_HOOK
+    name: "&5Enchanted Fishhook"
+    lore:
+      - "&7Pulled from a monster of the deep."
+      - "&fStill hums with magic."
+    chance: 0.015
+    enchantments:
+      LUCK: 1
+      VANISHING_CURSE: 1
+
+  barnacle_covered_spoon:
+    material: WOODEN_SHOVEL
+    name: "&fBarnacle-Covered Spoon"
+    lore:
+      - "&7A spoon that’s seen more ocean than soup."
+    chance: 0.08
+
+  abyss_crystal:
+    material: AMETHYST_SHARD
+    name: "&dAbyssal Crystal"
+    lore:
+      - "&7Found only in the darkest waters."
+      - "&fUsed by sea witches to trap souls."
+    chance: 0.01
+
+  rusty_saber:
+    material: IRON_SWORD
+    name: "&7Rusty Pirate Saber"
+    lore:
+      - "&8Corroded by time but still dangerous."
+    chance: 0.02
+    enchantments:
+      DAMAGE_ALL: 2
+      DURABILITY: 1
+
+  kelp_dog_toy:
+    material: KELP
+    name: "&aChewable Kelp Dog Toy"
+    lore:
+      - "&7Dogs love it. Probably."
+      - "&fYou... might not."
+    chance: 0.07
+
+  ghost_fish:
+    material: TROPICAL_FISH
+    name: "&fGhost Fish"
+    lore:
+      - "&7Phantom of the pond."
+      - "&fYou’re not sure it’s really there."
+    chance: 0.012
+
+  sunken_ring:
+    material: IRON_NUGGET
+    name: "&fSunken Wedding Ring"
+    lore:
+      - "&7A lost love… or a bad mistake."
+    chance: 0.025
+
+  cursed_pearl:
+    material: ENDER_PEARL
+    name: "&5Cursed Pearl"
+    lore:
+      - "&7It pulses. It whispers. It wants to go home."
+    chance: 0.007
+    enchantments:
+      BINDING_CURSE: 1
+      VANISHING_CURSE: 1
+
+  void_star:
+    material: NETHER_STAR
+    name: "&8Void Star Fragment"
+    lore:
+      - "&7From the sea’s deepest rift."
+      - "&fUnstable, powerful, unholy."
+    chance: 0.003
+    enchantments:
+      PROTECTION_EXPLOSIONS: 3
+      THORNS: 1
+
+  stormpiercer_trident:
+    material: TRIDENT
+    name: "&9Stormpiercer"
+    lore:
+      - "&7Forged in lightning, lost to the sea."
+      - "&fSaid to return only to those deemed worthy."
+    chance: 0.004
+    enchantments:
+      LOYALTY: 3
+      CHANNELING: 1
+      IMPALING: 4

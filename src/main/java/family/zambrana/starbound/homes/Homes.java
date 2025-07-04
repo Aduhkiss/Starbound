@@ -3,6 +3,7 @@ package family.zambrana.starbound.homes;
 import family.zambrana.starbound.MiniPlugin;
 import family.zambrana.starbound.Starter;
 import family.zambrana.starbound.homes.cmd.HomeCmd;
+import family.zambrana.starbound.homes.cmd.ListHomesCmd;
 import family.zambrana.starbound.homes.cmd.SetHomeCmd;
 
 public class Homes extends MiniPlugin {
@@ -11,5 +12,6 @@ public class Homes extends MiniPlugin {
 
         Starter.getInstance().getCommand("sethome").setExecutor(new SetHomeCmd());
         Starter.getInstance().getCommand("home").setExecutor(new HomeCmd());
+        Starter.getInstance().getCommand("homes").setExecutor(new ListHomesCmd());
     }
 }

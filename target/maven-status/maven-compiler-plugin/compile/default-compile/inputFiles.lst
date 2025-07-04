@@ -6,13 +6,15 @@ C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\cm
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\cmd\NickCommand.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\database\Database.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\database\DatabaseHolder.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\fishing\CustomFishing.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\fishing\LootManager.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\cmd\HomeCmd.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\cmd\ListHomesCmd.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\cmd\SetHomeCmd.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\Homes.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\MiniPlugin.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\nickname\NickBookGUI.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\Starter.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\util\BookUtil.java
-C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\util\C.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\util\Rank.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\util\SignGUI.java

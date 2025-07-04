@@ -19,13 +19,21 @@ public class HomeCmd implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (!(sender instanceof Player player)) return true;
 
+        if (args.length != 1) {
+            player.sendMessage("§cUsage: /home <name>");
+            return true;
+        }
+
+        String name = args[0].toLowerCase();
+
         try (Connection conn = DatabaseHolder.get().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM homes WHERE uuid = ?");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM homes WHERE uuid = ? AND name = ?");
             stmt.setString(1, player.getUniqueId().toString());
+            stmt.setString(2, name);
             ResultSet rs = stmt.executeQuery();
 
             if (!rs.next()) {
-                player.sendMessage("§cYou don't have a home set. Use /sethome first.");
+                player.sendMessage("§cNo home found with name: " + name);
                 return true;
             }
 
@@ -45,7 +53,7 @@ public class HomeCmd implements CommandExecutor {
             );
 
             player.teleport(loc);
-            player.sendMessage("§aTeleported to home.");
+            player.sendMessage("§aTeleported to home '" + name + "'.");
         } catch (Exception e) {
             player.sendMessage("§cFailed to teleport home.");
             e.printStackTrace();

@@ -33,7 +33,19 @@ public class CoreClientManager extends MiniPlugin {
         clients.put(player, client);
 
         if (client.isFirstJoin()) {
-            player.sendMessage("§aWelcome to the server, " + player.getName() + "!");
+            player.sendMessage("§8§m-----------------------------------------");
+            player.sendMessage("");
+            player.sendMessage("§b§l★ §r§aWelcome to §lAtticus' Lovely World§a, §e" + player.getName() + "§a!");
+            player.sendMessage("§7We're glad you're here. Enjoy your stay!");
+            player.sendMessage("");
+            player.sendMessage("§8§m-----------------------------------------");
+        } else {
+            player.sendMessage("§8§m-----------------------------------------");
+            player.sendMessage("");
+            player.sendMessage("§b§l★ §r§aWelcome back to §lAtticus' Lovely World§a, §e" + player.getName() + "§a!");
+            player.sendMessage("§7Great to see you again. Let’s make this session awesome!");
+            player.sendMessage("");
+            player.sendMessage("§8§m-----------------------------------------");
         }
     }
 

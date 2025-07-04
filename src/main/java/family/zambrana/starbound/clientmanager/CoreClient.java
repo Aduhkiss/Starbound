@@ -140,6 +140,10 @@ public class CoreClient {
         updateTablistName();
     }
 
+    public boolean has(Rank rank) {
+        return getRank().getLevel() >= rank.getLevel();
+    }
+
     public void updateNickname(String newName) {
         this.nickname = newName;
         player.setDisplayName(newName);

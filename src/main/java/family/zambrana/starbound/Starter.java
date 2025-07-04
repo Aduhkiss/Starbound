@@ -6,6 +6,7 @@ import family.zambrana.starbound.cmd.FlyCommand;
 import family.zambrana.starbound.cmd.NickCommand;
 import family.zambrana.starbound.database.Database;
 import family.zambrana.starbound.database.DatabaseHolder;
+import family.zambrana.starbound.fishing.CustomFishing;
 import family.zambrana.starbound.homes.Homes;
 import family.zambrana.starbound.util.SignGUI;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,8 +21,6 @@ public final class Starter extends JavaPlugin {
         me = this;
         saveDefaultConfig();
 
-        getCommand("fly").setExecutor(new FlyCommand());
-
         SignGUI.register();
 
         Database db = new Database();
@@ -31,6 +30,10 @@ public final class Starter extends JavaPlugin {
 
         StarboundChat chat = new StarboundChat(clientManager);
         new Homes();
+        new CustomFishing();
+
+        // set any commands here after all the miniplugins are done loading
+        getCommand("fly").setExecutor(new FlyCommand(clientManager));
     }
 
     @Override
