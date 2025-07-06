@@ -13,6 +13,7 @@ family\zambrana\starbound\fishing\LootManager.class
 family\zambrana\starbound\nickname\NickMainGUI.class
 family\zambrana\starbound\database\DatabaseHolder.class
 family\zambrana\starbound\clientmanager\CoreClientManager.class
+family\zambrana\starbound\util\StringUtil.class
 family\zambrana\starbound\util\BookUtil.class
 family\zambrana\starbound\util\Rank.class
 family\zambrana\starbound\Starter.class
@@ -22,6 +23,8 @@ family\zambrana\starbound\clientmanager\cmd\RankCmd.class
 family\zambrana\starbound\clientmanager\CoreClient.class
 family\zambrana\starbound\nickname\cmd\NickCmd.class
 family\zambrana\starbound\fishing\CustomFishing.class
+family\zambrana\starbound\staff\cmd\StaffCCmd.class
+family\zambrana\starbound\staff\Staff.class
 family\zambrana\starbound\homes\cmd\HomeCmd.class
 family\zambrana\starbound\homes\Homes.class
 family\zambrana\starbound\nickname\GUIHandler.class

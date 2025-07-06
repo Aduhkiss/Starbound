@@ -4,6 +4,9 @@ author: "Atticus Zambrana"
 main: family.zambrana.starbound.Starter
 api-version: '1.21'
 commands:
+  staffchat:
+    description: Send a message into the staff chat
+    aliases: ["s"]
   whitelist:
     description: Modify the whitelist
   fly:

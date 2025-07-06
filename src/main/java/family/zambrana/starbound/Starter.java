@@ -11,6 +11,7 @@ import family.zambrana.starbound.nickname.GUIHandler;
 import family.zambrana.starbound.nickname.NickManager;
 import family.zambrana.starbound.nickname.NickManagerRegistry;
 import family.zambrana.starbound.nickname.cmd.NickCmd;
+import family.zambrana.starbound.staff.Staff;
 import family.zambrana.starbound.teleporter.Teleporter;
 import family.zambrana.starbound.util.SignGUI;
 import family.zambrana.starbound.whitelist.Whitelist;
@@ -43,6 +44,7 @@ public final class Starter extends JavaPlugin {
         new CustomFishing();
         new Teleporter(clientManager);
         new Whitelist(clientManager);
+        new Staff(clientManager);
 
         // set any commands here after all the miniplugins are done loading
         getCommand("fly").setExecutor(new FlyCommand(clientManager));
