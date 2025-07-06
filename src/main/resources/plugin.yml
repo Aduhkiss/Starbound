@@ -1,7 +1,7 @@
 name: Starbound
 version: '1.0'
 author: "Atticus Zambrana"
-main: family.zambrana.starbound.Starter
+main: family.zambrana.starbound.Starbound
 api-version: '1.21'
 commands:
   staffchat:
@@ -13,6 +13,8 @@ commands:
     description: "Fly into the sky"
   rank:
     description: Update a players rank on the server
+  delhome:
+    description: Allows a player to remove an old home
   sethome:
     description: Allows you to set a home
   home:

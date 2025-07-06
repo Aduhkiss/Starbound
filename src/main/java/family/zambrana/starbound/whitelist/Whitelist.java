@@ -1,8 +1,7 @@
 package family.zambrana.starbound.whitelist;
 
 import family.zambrana.starbound.MiniPlugin;
-import family.zambrana.starbound.Starter;
-import family.zambrana.starbound.clientmanager.CoreClient;
+import family.zambrana.starbound.Starbound;
 import family.zambrana.starbound.clientmanager.CoreClientManager;
 import family.zambrana.starbound.database.DatabaseHolder;
 import family.zambrana.starbound.whitelist.cmd.WhitelistCmd;
@@ -29,7 +28,7 @@ public class Whitelist extends MiniPlugin {
         this.clientManager = clientManager;
         loadWhitelist();
 
-        Starter.getInstance().getCommand("whitelist").setExecutor(new WhitelistCmd(this, clientManager));
+        Starbound.getInstance().getCommand("whitelist").setExecutor(new WhitelistCmd(this, clientManager));
     }
 
     private void loadWhitelist() {
@@ -96,6 +95,7 @@ public class Whitelist extends MiniPlugin {
                             "§7If you believe this is an error,\n" +
                             "§7please contact an §badmin §7or apply on our Discord.\n\n" +
                             "§8> §oLaunch aborted.");
+            Bukkit.getLogger().info("[Whitelist]: " + player.getName() + " tried to join, but is not whitelisted.");
         }
     }
 }

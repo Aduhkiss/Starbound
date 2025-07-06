@@ -25,7 +25,7 @@ public class TeleportCmd implements CommandExecutor {
         }
 
         Player senderPlayer = sender instanceof Player ? (Player) sender : null;
-        if (senderPlayer != null && !manager.getClient(senderPlayer).has(Rank.MOD)) {
+        if (senderPlayer != null && !manager.getClient(senderPlayer).has(Rank.MODERATOR)) {
             sender.sendMessage("§cYou are not allowed to use this.");
             return true;
         }

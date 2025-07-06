@@ -1,7 +1,7 @@
 package family.zambrana.starbound.clientmanager;
 
 import family.zambrana.starbound.MiniPlugin;
-import family.zambrana.starbound.Starter;
+import family.zambrana.starbound.Starbound;
 import family.zambrana.starbound.clientmanager.cmd.GameModeCmd;
 import family.zambrana.starbound.clientmanager.cmd.RankCmd;
 import family.zambrana.starbound.database.Database;
@@ -24,8 +24,8 @@ public class CoreClientManager extends MiniPlugin {
         super("Core Client Manager");
         this.db = db;
 
-        Starter.getInstance().getCommand("rank").setExecutor(new RankCmd(this));
-        Starter.getInstance().getCommand("gamemode").setExecutor(new GameModeCmd(this));
+        Starbound.getInstance().getCommand("rank").setExecutor(new RankCmd(this));
+        Starbound.getInstance().getCommand("gamemode").setExecutor(new GameModeCmd(this));
     }
 
     @EventHandler

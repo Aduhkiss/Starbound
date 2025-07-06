@@ -10,7 +10,7 @@ public class MiniPlugin implements Listener {
     public MiniPlugin(String name) {
         this.name = name;
         Bukkit.getLogger().info(name + "> Started.");
-        Bukkit.getPluginManager().registerEvents(this, Starter.getInstance());
+        Bukkit.getPluginManager().registerEvents(this, Starbound.getInstance());
     }
     public String getName() {
         return name;

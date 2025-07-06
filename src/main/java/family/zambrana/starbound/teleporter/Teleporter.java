@@ -1,7 +1,7 @@
 package family.zambrana.starbound.teleporter;
 
 import family.zambrana.starbound.MiniPlugin;
-import family.zambrana.starbound.Starter;
+import family.zambrana.starbound.Starbound;
 import family.zambrana.starbound.clientmanager.CoreClientManager;
 import family.zambrana.starbound.teleporter.cmd.TeleportCmd;
 
@@ -12,6 +12,6 @@ public class Teleporter extends MiniPlugin {
         super("Teleporter");
         this.clientManager = clientManager;
 
-        Starter.getInstance().getCommand("teleport").setExecutor(new TeleportCmd(clientManager));
+        Starbound.getInstance().getCommand("teleport").setExecutor(new TeleportCmd(clientManager));
     }
 }

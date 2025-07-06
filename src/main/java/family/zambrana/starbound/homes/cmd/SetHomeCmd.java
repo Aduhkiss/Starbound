@@ -44,8 +44,8 @@ public class SetHomeCmd implements CommandExecutor {
             checkStmt.setString(2, name);
             ResultSet exists = checkStmt.executeQuery();
 
-            if (!exists.next() && homeCount >= 4) {
-                player.sendMessage("§cYou already have 4 homes.");
+            if (!exists.next() && homeCount >= 5) {
+                player.sendMessage("§cYou already have 5 homes.");
                 return true;
             }
 

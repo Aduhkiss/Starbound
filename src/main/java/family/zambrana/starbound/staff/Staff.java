@@ -1,10 +1,11 @@
 package family.zambrana.starbound.staff;
 
 import family.zambrana.starbound.MiniPlugin;
-import family.zambrana.starbound.Starter;
+import family.zambrana.starbound.Starbound;
 import family.zambrana.starbound.clientmanager.CoreClient;
 import family.zambrana.starbound.clientmanager.CoreClientManager;
 import family.zambrana.starbound.staff.cmd.StaffCCmd;
+import family.zambrana.starbound.util.EZ;
 import family.zambrana.starbound.util.Rank;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,11 +13,11 @@ import org.bukkit.entity.Player;
 public class Staff extends MiniPlugin {
 
     private CoreClientManager clientManager;
-    public Staff(CoreClientManager clientManager) {
+    public Staff() {
         super("Staff Service");
-        this.clientManager = clientManager;
+        this.clientManager = EZ.clientManager;
 
-        Starter.getInstance().getCommand("staffchat").setExecutor(new StaffCCmd(clientManager, this));
+        Starbound.getInstance().getCommand("staffchat").setExecutor(new StaffCCmd(clientManager, this));
     }
 
     /*
