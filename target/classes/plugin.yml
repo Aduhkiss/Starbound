@@ -4,6 +4,8 @@ author: "Atticus Zambrana"
 main: family.zambrana.starbound.Starter
 api-version: '1.21'
 commands:
+  whitelist:
+    description: Modify the whitelist
   fly:
     description: "Fly into the sky"
   rank:
@@ -14,3 +16,9 @@ commands:
     description: Teleport to your home
   homes:
     description: Display a list of all of your homes
+  teleport:
+    aliases: ["tp"]
+    description: Teleport to another player or teleport them to another player
+  gamemode:
+    aliases: ["gm"]
+    description: Toggle your current gamemode

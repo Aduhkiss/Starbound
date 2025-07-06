@@ -10,7 +10,8 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class StarboundChat extends MiniPlugin {
 
-    private CoreClientManager clientManager;
+    private final CoreClientManager clientManager;
+
     public StarboundChat(CoreClientManager clientManager) {
         super("Chat Service");
         this.clientManager = clientManager;
@@ -18,16 +19,16 @@ public class StarboundChat extends MiniPlugin {
 
     @EventHandler
     public void onPlayerChatted(AsyncPlayerChatEvent ev) {
-        // first stop bitch ass minecraft from handling the chat message
-        // also fuck mojang chat censors
         ev.setCancelled(true);
 
-        // then lookup the player's information
         CoreClient client = clientManager.getClient(ev.getPlayer());
 
-        // then broadcast their message to the whole server manually
-        for(Player pl : Bukkit.getOnlinePlayers()) {
-            pl.sendMessage(client.getRankPrefix() + client.getNickname() + "§f: " + ev.getMessage());
+        String prefix = client.getDisplayPrefix();
+        String nick = client.getNickname();
+        String message = ev.getMessage();
+
+        for (Player pl : Bukkit.getOnlinePlayers()) {
+            pl.sendMessage(prefix + nick + "§f: " + message);
         }
     }
 }

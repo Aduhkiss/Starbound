@@ -74,4 +74,12 @@ public enum Rank {
     public int getLevel() {
         return level;
     }
+
+    public static Rank safeValueOf(String input) {
+        try {
+            return Rank.valueOf(input.toUpperCase());
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return Rank.PLAYER;
+        }
+    }
 }

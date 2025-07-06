@@ -10,29 +10,27 @@ import org.bukkit.inventory.meta.BookMeta;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class BookUtil {
 
     public static class ClickablePage {
         private final String text;
-        private final Runnable onClick;
+        private final String command;
 
-        public ClickablePage(String text, Runnable onClick) {
+        public ClickablePage(String text, String command) {
             this.text = text;
-            this.onClick = onClick;
+            this.command = command;
         }
 
         public String getText() {
             return text;
         }
 
-        public Runnable getOnClick() {
-            return onClick;
+        public String getCommand() {
+            return command;
         }
     }
 
-    // Simulate opening a book with clickable lines (one per page)
     public static void openBook(Player player, String intro, List<ClickablePage> clickablePages) {
         List<String> pages = new ArrayList<>();
         StringBuilder current = new StringBuilder(intro + "\n\n");
@@ -45,33 +43,28 @@ public class BookUtil {
 
         ItemStack book = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta meta = (BookMeta) book.getItemMeta();
-
         meta.setTitle("Nickname Setup");
         meta.setAuthor("System");
         meta.setPages(pages);
         book.setItemMeta(meta);
 
-        // Workaround to open book
         int slot = player.getInventory().getHeldItemSlot();
         ItemStack prev = player.getInventory().getItem(slot);
         player.getInventory().setItem(slot, book);
         player.openBook(book);
+
         Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("Starbound"), () -> {
             player.getInventory().setItem(slot, prev);
         }, 1L);
 
-        // Click simulation fallback
+        // Fallback chat lines
         Bukkit.getScheduler().runTaskLater(Bukkit.getPluginManager().getPlugin("Starbound"), () -> {
             player.sendMessage("§7Click a line below:");
             for (ClickablePage clickable : clickablePages) {
                 TextComponent line = new TextComponent(clickable.getText());
-                line.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/nick_select_" + sanitize(clickable.getText())));
+                line.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, clickable.getCommand()));
                 player.spigot().sendMessage(line);
             }
         }, 10L);
-    }
-
-    private static String sanitize(String text) {
-        return text.replaceAll("[^a-zA-Z0-9]", "_").toLowerCase();
     }
 }

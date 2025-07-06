@@ -140,13 +140,6 @@ custom_loot:
       - "&fYou’re not sure it’s really there."
     chance: 0.012
 
-  sunken_ring:
-    material: IRON_NUGGET
-    name: "&fSunken Wedding Ring"
-    lore:
-      - "&7A lost love… or a bad mistake."
-    chance: 0.025
-
   cursed_pearl:
     material: ENDER_PEARL
     name: "&5Cursed Pearl"

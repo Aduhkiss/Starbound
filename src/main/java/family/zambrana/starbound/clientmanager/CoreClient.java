@@ -1,9 +1,9 @@
 package family.zambrana.starbound.clientmanager;
 
 import family.zambrana.starbound.database.DatabaseHolder;
+import family.zambrana.starbound.nickname.NickManagerRegistry;
 import family.zambrana.starbound.util.Rank;
 import org.bukkit.entity.Player;
-import xyz.haoshoku.nick.api.NickAPI;
 
 import java.sql.*;
 import java.time.Instant;
@@ -15,6 +15,7 @@ public class CoreClient {
     private boolean firstJoin = false;
     private String nickname;
     private String skin;
+    private String fakePrefix;
 
     public CoreClient(Player player) {
         this.player = player;
@@ -23,11 +24,10 @@ public class CoreClient {
     }
 
     public void updateTablistName() {
-        String fullName = rank.getPrefix() + nickname;
+        String fullName = getDisplayPrefix() + nickname;
         player.setPlayerListName(fullName);
     }
 
-    // Make this shit public so that we can call from upon it later
     public void loadOrCreatePlayerData() {
         try (Connection conn = DatabaseHolder.get().getConnection()) {
             String uuid = player.getUniqueId().toString();
@@ -38,21 +38,13 @@ public class CoreClient {
             ResultSet rs = select.executeQuery();
 
             if (rs.next()) {
-                // Load rank
-                String rankStr = rs.getString("rank");
-                try {
-                    this.rank = Rank.valueOf(rankStr.toUpperCase());
-                } catch (IllegalArgumentException ignored) {
-                    this.rank = Rank.PLAYER;
-                }
-
-                // Load nickname and fallback if null
+                this.rank = Rank.safeValueOf(rs.getString("rank"));
                 this.nickname = rs.getString("display_name");
                 this.skin = rs.getString("skin_name");
-                if (this.nickname == null || this.nickname.trim().isEmpty()) {
-                    this.nickname = player.getName();
+                this.fakePrefix = rs.getString("fake_rank_prefix");
 
-                    // Patch DB to fix null nickname
+                if (nickname == null || nickname.trim().isEmpty()) {
+                    this.nickname = player.getName();
                     PreparedStatement patch = conn.prepareStatement(
                             "UPDATE players SET display_name = ? WHERE uuid = ?"
                     );
@@ -61,9 +53,8 @@ public class CoreClient {
                     patch.executeUpdate();
                 }
 
-                player.setDisplayName(this.nickname);
+                player.setDisplayName(nickname);
 
-                // Update IP address
                 PreparedStatement update = conn.prepareStatement(
                         "UPDATE players SET last_ip = ? WHERE uuid = ?"
                 );
@@ -72,26 +63,29 @@ public class CoreClient {
                 update.executeUpdate();
 
             } else {
-                // First-time player
                 firstJoin = true;
-
                 this.nickname = player.getName();
-                player.setDisplayName(this.nickname);
+                this.skin = "NORMAL";
+                player.setDisplayName(nickname);
 
                 PreparedStatement insert = conn.prepareStatement(
-                        "INSERT INTO players (uuid, name, rank, first_join, last_ip, display_name) VALUES (?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO players (uuid, name, rank, first_join, last_ip, display_name, skin_name) VALUES (?, ?, ?, ?, ?, ?, ?)"
                 );
                 insert.setString(1, uuid);
                 insert.setString(2, player.getName());
                 insert.setString(3, Rank.PLAYER.name());
                 insert.setTimestamp(4, Timestamp.from(Instant.now()));
                 insert.setString(5, player.getAddress().getAddress().getHostAddress());
-                insert.setString(6, this.nickname);
+                insert.setString(6, nickname);
+                insert.setString(7, skin);
                 insert.executeUpdate();
             }
 
-            player.setDisplayName(nickname);
             updateTablistName();
+
+            if (!nickname.equals(player.getName()) || (skin != null && !skin.equalsIgnoreCase("NORMAL"))) {
+                NickManagerRegistry.get().applyNickname(player, nickname, skin);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,6 +104,10 @@ public class CoreClient {
         return rank.getPrefix();
     }
 
+    public String getDisplayPrefix() {
+        return (fakePrefix != null && !fakePrefix.isEmpty()) ? fakePrefix : rank.getPrefix();
+    }
+
     public boolean isFirstJoin() {
         return firstJoin;
     }
@@ -122,24 +120,6 @@ public class CoreClient {
         return skin;
     }
 
-    public void updateSkin(String skinName) {
-        this.skin = skinName;
-        try (Connection conn = DatabaseHolder.get().getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement(
-                    "UPDATE players SET skin_name = ? WHERE uuid = ?"
-            );
-            stmt.setString(1, skinName);
-            stmt.setString(2, player.getUniqueId().toString());
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // Placeholder for actual skin change
-        player.sendMessage("§a[Starbound] Skin updated to: " + skinName);
-        updateTablistName();
-    }
-
     public boolean has(Rank rank) {
         return getRank().getLevel() >= rank.getLevel();
     }
@@ -147,6 +127,7 @@ public class CoreClient {
     public void updateNickname(String newName) {
         this.nickname = newName;
         player.setDisplayName(newName);
+        updateTablistName();
 
         try (Connection conn = DatabaseHolder.get().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
@@ -158,23 +139,70 @@ public class CoreClient {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        updateTablistName();
-    }
-    public void resetNick() {
-        // Reset with NickAPI
-        NickAPI.resetNick(player);
-        NickAPI.resetSkin(player);
-        NickAPI.resetUniqueId(player);
-        NickAPI.resetProfileName(player);
-        NickAPI.refreshPlayer(player);
 
-        // Reset nickname in database
-        this.nickname = player.getName(); // original name
+        NickManagerRegistry.get().applyNickname(player, newName, this.skin != null ? this.skin : "NORMAL");
+    }
+
+    public void updateSkin(String skinName) {
+        this.skin = skinName;
+
         try (Connection conn = DatabaseHolder.get().getConnection()) {
             PreparedStatement stmt = conn.prepareStatement(
-                    "UPDATE players SET display_name = ?, skin_name = ? WHERE uuid = ?"
+                    "UPDATE players SET skin_name = ? WHERE uuid = ?"
             );
-            stmt.setString(1, player.getName());
+            stmt.setString(1, skinName);
+            stmt.setString(2, player.getUniqueId().toString());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        player.sendMessage("§a[Starbound] Skin updated to: " + skinName);
+        NickManagerRegistry.get().applyNickname(player, nickname, skinName);
+    }
+
+    public void setFakePrefix(String prefix) {
+        this.fakePrefix = prefix;
+        try (Connection conn = DatabaseHolder.get().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE players SET fake_rank_prefix = ? WHERE uuid = ?"
+            );
+            stmt.setString(1, prefix);
+            stmt.setString(2, player.getUniqueId().toString());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        updateTablistName();
+    }
+
+    public void resetFakePrefix() {
+        this.fakePrefix = null;
+        try (Connection conn = DatabaseHolder.get().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE players SET fake_rank_prefix = NULL WHERE uuid = ?"
+            );
+            stmt.setString(1, player.getUniqueId().toString());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        updateTablistName();
+    }
+
+    public void resetNick() {
+        this.nickname = player.getName();
+        this.skin = "NORMAL";
+        this.fakePrefix = null;
+
+        player.setDisplayName(nickname);
+        updateTablistName();
+
+        try (Connection conn = DatabaseHolder.get().getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(
+                    "UPDATE players SET display_name = ?, skin_name = ?, fake_rank_prefix = NULL WHERE uuid = ?"
+            );
+            stmt.setString(1, nickname);
             stmt.setString(2, "NORMAL");
             stmt.setString(3, player.getUniqueId().toString());
             stmt.executeUpdate();
@@ -182,15 +210,13 @@ public class CoreClient {
             e.printStackTrace();
         }
 
-        updateTablistName();
-
-        player.setDisplayName(player.getName());
-        player.sendMessage("§cYour nickname and skin have been reset.");
+        NickManagerRegistry.get().resetNickname(player);
+        player.sendMessage("§cYour nickname, rank prefix, and skin have been reset.");
     }
 
     public void setRank(Rank newRank) {
         this.rank = newRank;
-        updateTablistName(); // if you use tab updates
+        updateTablistName();
         player.sendMessage("§aYour rank has been updated to: " + newRank.getPrefix());
     }
 }
