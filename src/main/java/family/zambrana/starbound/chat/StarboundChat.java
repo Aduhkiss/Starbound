@@ -67,6 +67,8 @@ public class StarboundChat extends MiniPlugin {
         for (Player pl : Bukkit.getOnlinePlayers()) {
             pl.spigot().sendMessage(fullMessage);
         }
+        // ha dumbass didnt add message logging
+        Bukkit.getLogger().info("[" + ev.getPlayer().getName() + "]: " + ev.getMessage());
     }
 
     private String extractFirstColorCode(String text) {

@@ -13,6 +13,10 @@ C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\ho
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\cmd\ListHomesCmd.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\cmd\SetHomeCmd.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\homes\Homes.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\hubcore\cmd\ServersCmd.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\hubcore\gui\SelectHubGui.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\hubcore\gui\SelectServerGui.java
+C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\hubcore\HubCore.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\MiniPlugin.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\nickname\cmd\NickCmd.java
 C:\Users\thecl\IdeaProjects\Starbound\src\main\java\family\zambrana\starbound\nickname\GUIHandler.java

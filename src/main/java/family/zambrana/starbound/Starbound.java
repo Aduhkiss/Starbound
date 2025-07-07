@@ -7,6 +7,7 @@ import family.zambrana.starbound.database.Database;
 import family.zambrana.starbound.database.DatabaseHolder;
 import family.zambrana.starbound.fishing.CustomFishing;
 import family.zambrana.starbound.homes.Homes;
+import family.zambrana.starbound.hubcore.HubCore;
 import family.zambrana.starbound.nickname.NickManager;
 import family.zambrana.starbound.nickname.NickManagerRegistry;
 import family.zambrana.starbound.nickname.cmd.NickCmd;
@@ -51,7 +52,7 @@ public final class Starbound extends JavaPlugin {
         }
         // or if the server is a hub or lobby
         if(getConfig().getString("server.group").equalsIgnoreCase("us-hub")) {
-
+            HubCore hub = new HubCore();
         }
         // or if the server is a staff server
         if(getConfig().getString("server.group").equalsIgnoreCase("us-staff")) {
