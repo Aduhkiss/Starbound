@@ -4,6 +4,8 @@ author: "Atticus Zambrana"
 main: family.zambrana.starbound.Starbound
 api-version: '1.21'
 commands:
+  disguise:
+    description: Nickname system
   staffchat:
     description: Send a message into the staff chat
     aliases: ["s"]

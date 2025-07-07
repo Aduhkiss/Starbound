@@ -19,16 +19,16 @@ public class GameModeCmd implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+        Player caller = (Player) sender;
+        if(!clientManager.getClient(caller).has(Rank.ADMIN)) {
+            caller.sendMessage("§cYou are not allowed to use this.");
+            return false;
+        }
         if (args.length == 0) {
             // Toggle self
             if (!(sender instanceof Player)) {
                 sender.sendMessage("§cConsole must specify a player.");
                 return true;
-            }
-            Player caller = (Player) sender;
-            if(!clientManager.getClient(caller).has(Rank.ADMIN)) {
-                caller.sendMessage("§cYou are not allowed to use this.");
-                return false;
             }
 
             Player player = (Player) sender;

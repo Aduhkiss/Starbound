@@ -1,6 +1,5 @@
 package family.zambrana.starbound.staff.cmd;
 
-import family.zambrana.starbound.clientmanager.CoreClient;
 import family.zambrana.starbound.clientmanager.CoreClientManager;
 import family.zambrana.starbound.staff.Staff;
 import family.zambrana.starbound.util.Rank;

@@ -38,6 +38,10 @@
   </build>
   <repositories>
     <repository>
+      <id>nickapi</id>
+      <url>https://haoshoku.xyz:8081/repository/default/</url>
+    </repository>
+    <repository>
       <id>mojang</id>
       <url>https://libraries.minecraft.net/</url>
     </repository>
@@ -61,6 +65,12 @@
       <groupId>com.comphenix.protocol</groupId>
       <artifactId>ProtocolLib</artifactId>
       <version>5.1.0</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>xyz.haoshoku.nick</groupId>
+      <artifactId>nickapi</artifactId>
+      <version>7.6</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

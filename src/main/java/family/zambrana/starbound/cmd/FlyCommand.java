@@ -25,7 +25,7 @@ public class FlyCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        if(!clientManager.getClient(player).has(Rank.MVP)) {
+        if(!clientManager.getClient(player).has(Rank.MODERATOR)) {
             player.sendMessage("§cYou are not allowed to use this.");
             return false;
         }

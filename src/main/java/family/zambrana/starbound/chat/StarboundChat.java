@@ -44,14 +44,15 @@ public class StarboundChat extends MiniPlugin {
         }
 
         // Create prefix with hover
-        TextComponent prefixComponent = new TextComponent(rank.getPrefix());
+        String displayPrefix = client.getDisplayPrefix();
+        TextComponent prefixComponent = new TextComponent(displayPrefix);
         prefixComponent.setHoverEvent(new HoverEvent(
                 HoverEvent.Action.SHOW_TEXT,
-                new ComponentBuilder("§e" + rank.getName() + "\n§7" + rank.getDescription()).create()
+                new ComponentBuilder(getHoverText(client)).create()
         ));
 
         // Color the player's nickname to match the first color in the prefix
-        String prefixColor = extractFirstColorCode(rank.getPrefix());
+        String prefixColor = extractFirstColorCode(displayPrefix);
         TextComponent nameComponent = new TextComponent(prefixColor + nick + "§f: ");
 
         // Plain message text
@@ -75,5 +76,19 @@ public class StarboundChat extends MiniPlugin {
             }
         }
         return "§f"; // fallback to white
+    }
+
+    private String getHoverText(CoreClient client) {
+        String prefix = client.getDisplayPrefix();
+        Rank disguisedRank = Rank.PLAYER;
+
+        for (Rank r : Rank.values()) {
+            if (r.getPrefix().equalsIgnoreCase(prefix)) {
+                disguisedRank = r;
+                break;
+            }
+        }
+
+        return "§e" + disguisedRank.getName() + "\n§7" + disguisedRank.getDescription();
     }
 }

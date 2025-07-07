@@ -157,7 +157,7 @@ public class CoreClient {
             e.printStackTrace();
         }
 
-        player.sendMessage("§a[Starbound] Skin updated to: " + skinName);
+        //player.sendMessage("§a[Starbound] Skin updated to: " + skinName);
         NickManagerRegistry.get().applyNickname(player, nickname, skinName);
     }
 
@@ -211,12 +211,12 @@ public class CoreClient {
         }
 
         NickManagerRegistry.get().resetNickname(player);
-        player.sendMessage("§cYour nickname, rank prefix, and skin have been reset.");
+        //player.sendMessage("§cYour nickname, rank prefix, and skin have been reset.");
     }
 
     public void setRank(Rank newRank) {
         this.rank = newRank;
         updateTablistName();
-        player.sendMessage("§aYour rank has been updated to: " + newRank.getPrefix());
+        player.sendMessage("§aYour rank has been updated to: " + newRank.getName() + "!");
     }
 }

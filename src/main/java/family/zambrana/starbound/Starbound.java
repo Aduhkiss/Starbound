@@ -7,6 +7,9 @@ import family.zambrana.starbound.database.Database;
 import family.zambrana.starbound.database.DatabaseHolder;
 import family.zambrana.starbound.fishing.CustomFishing;
 import family.zambrana.starbound.homes.Homes;
+import family.zambrana.starbound.nickname.NickManager;
+import family.zambrana.starbound.nickname.NickManagerRegistry;
+import family.zambrana.starbound.nickname.cmd.NickCmd;
 import family.zambrana.starbound.staff.Staff;
 import family.zambrana.starbound.teleporter.Teleporter;
 import family.zambrana.starbound.util.EZ;
@@ -32,17 +35,29 @@ public final class Starbound extends JavaPlugin {
 
         // Set in the new EZ class
         EZ.clientManager = clientManager;
-        //getCommand("nick").setExecutor(new NickCmd(clientManager));
+        getCommand("disguise").setExecutor(new NickCmd());
 
         Staff staff = new Staff();
         StarboundChat chat = new StarboundChat(clientManager, staff);
 
-        //NickManager nicknames = new NickManager(this);
-        //NickManagerRegistry.register(nicknames);
+        NickManager nicknames = new NickManager();
+        NickManagerRegistry.register(nicknames);
         //new GUIHandler();
 
-        new Homes();
-        new CustomFishing();
+        // If the server is an SMP
+        if(getConfig().getString("server.group").equalsIgnoreCase("us-smp")) {
+            new Homes();
+            new CustomFishing();
+        }
+        // or if the server is a hub or lobby
+        if(getConfig().getString("server.group").equalsIgnoreCase("us-hub")) {
+
+        }
+        // or if the server is a staff server
+        if(getConfig().getString("server.group").equalsIgnoreCase("us-staff")) {
+
+        }
+
         new Teleporter(clientManager);
         new Whitelist(clientManager);
 

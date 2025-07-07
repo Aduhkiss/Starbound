@@ -1,3 +1,7 @@
-family/zambrana/starbound/Starbound.class
-family/zambrana/starbound/util/EZ.class
-family/zambrana/starbound/homes/cmd/DelHomeCmd.class
+family\zambrana\starbound\punishment\Punishment.class
+family\zambrana\starbound\punishment\Punish.class
+family\zambrana\starbound\homes\cmd\DelHomeCmd.class
+family\zambrana\starbound\punishment\Punishment$Type.class
+family\zambrana\starbound\util\DurationParser.class
+family\zambrana\starbound\util\EZ.class
+family\zambrana\starbound\Starbound.class
